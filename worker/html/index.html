@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Where's My Platform?</title>
+  <meta name="description" content="Live platform reporting status for UK train stations." />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <script>
+    // If someone visits this direct URL (not in an iframe), redirect them back to the Next Trains webpage.
+    if (window.top === window.self) {
+      fetch('/api/config')
+        .then(res => res.json())
+        .then(data => {
+          if (data.redirectUrl) {
+            window.location.replace(data.redirectUrl);
+          }
+        });
+    }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://unpkg.com/maplibre-gl@^5.6.1/dist/maplibre-gl.js" defer></script>
+  <link href="https://unpkg.com/maplibre-gl@^5.6.1/dist/maplibre-gl.css" rel="stylesheet" />
+
+  <script src="map.js" defer></script>
+</head>
+
+<body>
+  <div id="map" class="loading"></div>
+
+  <div class="glass-panel" id="infoPanel">
+    <header>
+      <div class="header-top">
+        <h1>Where's My Platform?</h1>
+        <button id="panelToggle" class="panel-toggle" aria-label="Toggle Panel">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        </button>
+      </div>
+      <p class="subtitle">Platform reporting status across the UK</p>
+    </header>
+    <div class="content">
+      <p>Some stations artificially hide platform numbers until boarding time. We track if these changes propagate
+        correctly to open data feeds so you aren't left running for your train.</p>
+      <p>This implementation is heavily based on David Wheatley's solution <a href="https://wheresmyplatform.com"
+          target="_blank">wheresmyplatform.com</a>
+      <p>
+      <div class="legend">
+        <div class="legend-item"><span class="dot green"></span> Great (&ge;80%)</div>
+        <div class="legend-item"><span class="dot yellow"></span> Okay (35&ndash;79%)</div>
+        <div class="legend-item"><span class="dot red"></span> Poor (&lt;35%)</div>
+      </div>
+    </div>
+    <!--
+    <footer>
+
+
+      <a href="https://www.nationalrail.co.uk/developers/darwin-data-feeds/" target="_blank">
+        <img id="nre" src="/nre_powered.png" alt="Powered by National Rail Enquiries" />
+      </a>
+      <img id="nre" src="/nre_powered.png" alt="Powered by National Rail Enquiries" />
+      <p>Data provided by <a href="https://www.nationalrail.co.uk/developers/darwin-data-feeds/"
+          target="_blank">National Rail</a></p>
+
+    </footer>
+-->
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "wheresmyplatform-worker",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,less,mdx,html,css}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,less,mdx,html,css}\""
+  },
+  "packageManager": "yarn@4.9.2",
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250715.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.25.0"
+  }
+}

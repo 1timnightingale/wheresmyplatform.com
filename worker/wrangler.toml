@@ -1,0 +1,18 @@
+name = "wheresmyplatform"
+
+compatibility_date = "2025-07-17"
+compatibility_flags = ["nodejs_compat"]
+preview_urls = true
+main = "api/worker.ts"
+
+[assets]
+directory = "./html"
+not_found_handling = "404-page"
+
+[observability.logs]
+enabled = true
+
+[[kv_namespaces]]
+binding = "STATIONS_DATA"
+id = "bd54f4c6221d44938e5f653203fd77db"
+preview_id = "bd54f4c6221d44938e5f653203fd77db"

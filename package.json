@@ -1,0 +1,9 @@
+{
+  "name": "wheresmyplatform-root",
+  "private": true,
+  "workspaces": [
+    "worker",
+    "datacollector"
+  ],
+  "packageManager": "yarn@4.9.2"
+}
