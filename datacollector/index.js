@@ -83,10 +83,11 @@ async function processStation(s) {
       totalServices: meaningfulServices.length,
       platformedServices: publicPlatformed.length,
       hiddenServices: hiddenPlatformed.length,
+      lastUpdated: new Date().toISOString(),
     };
   } catch (e) {
     if (e.message.includes('HTTP 429')) console.log(`   [Rate Limited] Retrying ${s.crs} later...`);
-    return { ...s, platformedPercentage: null, totalServices: 0, platformedServices: 0, failed: true };
+    return { ...s, platformedPercentage: null, totalServices: 0, platformedServices: 0, failed: true, lastUpdated: new Date().toISOString() };
   }
 }
 

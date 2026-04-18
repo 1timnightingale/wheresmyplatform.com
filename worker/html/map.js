@@ -82,15 +82,25 @@ async function updatePlatformingData(abortController) {
       return
     }
 
-    const now = new Date()
-    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-
     const features = data.stations.map(stn => {
       let colorStatus = 'gray'
       if (typeof stn.platformedPercentage === 'number' && !isNaN(stn.platformedPercentage)) {
         if (stn.platformedPercentage >= 80) colorStatus = 'green'
         else if (stn.platformedPercentage >= 35) colorStatus = 'yellow'
         else colorStatus = 'red'
+      }
+
+      let timeStr;
+      if (stn.lastUpdated) {
+        const date = new Date(stn.lastUpdated);
+        timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } else if (data.timestamp) {
+        // Fallback to top-level timestamp if transition still happening
+        const date = new Date(data.timestamp);
+        timeStr = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      } else {
+        const now = new Date();
+        timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       }
 
       return {

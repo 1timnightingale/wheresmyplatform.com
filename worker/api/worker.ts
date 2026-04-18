@@ -19,7 +19,10 @@ export default {
            });
          }
 
-         return new Response(JSON.stringify({ stations: JSON.parse(cachedStationsJson) }), {
+         const parsed = JSON.parse(cachedStationsJson);
+         const responseObj = Array.isArray(parsed) ? { stations: parsed } : parsed;
+
+         return new Response(JSON.stringify(responseObj), {
            headers: {
              'Content-Type': 'application/json',
              'Cache-Control': 'public, max-age=60',
