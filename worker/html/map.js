@@ -122,6 +122,12 @@ async function updatePlatformingData(abortController) {
       }
     })
 
+    features.sort((a, b) => {
+      const aVal = (typeof a.properties.pct === 'number' && !isNaN(a.properties.pct)) ? a.properties.pct : Infinity;
+      const bVal = (typeof b.properties.pct === 'number' && !isNaN(b.properties.pct)) ? b.properties.pct : Infinity;
+      return bVal - aVal;
+    })
+
     stationDataGeoJson.features = features
 
     const source = map.getSource('stations')
